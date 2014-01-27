@@ -1,0 +1,8 @@
+name = Entity overview
+description = Provides entity overview pages.
+core = 7.x
+version = 7.x-1.0
+
+dependencies[] = filter_form
+
+files[] = includes/entity_overview.ui.inc
