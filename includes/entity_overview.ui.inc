@@ -107,6 +107,22 @@ class EntityOverviewDefaultUIController {
    *  Array of queried entities.
    */
   protected function query() {
+    $this->buildQuery();
+
+    $entities = $this->query->execute();
+    if (!empty($entities[$this->entityType])) {
+      $ids = array_keys($entities[$this->entityType]);
+
+      return entity_load($this->entityType, $ids);
+    }
+
+    return array();
+  }
+
+  /**
+   * Builds Entity field query.
+   */
+  protected function buildQuery() {
     $query = new EntityFieldQuery();
     $query->entityCondition('entity_type', $this->entityType)
             ->pager(static::ENTITIES_PER_PAGE);
@@ -135,15 +151,6 @@ class EntityOverviewDefaultUIController {
     }
     // Store the query.
     $this->query = $query;
-
-    $entities = $query->execute();
-    if (!empty($entities[$this->entityType])) {
-      $ids = array_keys($entities[$this->entityType]);
-
-      return entity_load($this->entityType, $ids);
-    }
-
-    return array();
   }
 
   /**
