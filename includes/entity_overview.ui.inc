@@ -257,7 +257,7 @@ class EntityOverviewDefaultUIController {
    * @return array
    *  Filter form renderable array.
    */
-  public function filterForm() {
+  public function filterForm(&$form, &$form_state) {
     return array();
   }
 
@@ -274,7 +274,7 @@ class EntityOverviewDefaultUIController {
   /**
    * Applies filter values.
    */
-  protected function applyFilter() {
+  protected function applyFilter(EntityFieldQuery &$query) {
     $values = $this->getFilterValues();
 
     foreach ($values as $key => $value) {
